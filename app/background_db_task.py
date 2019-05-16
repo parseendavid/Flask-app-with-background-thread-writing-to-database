@@ -26,11 +26,14 @@ def fetch_joke(url):
 def write_to_db(db):
     # Data cannot be passed as a param because it will be prefetched
     # by the thread and reused.
-    data = fetch_joke(url)
-    if Joke.query.filter_by(setup=data['setup']).first() is None:
-        joke = Joke(_type=data['type'], setup=data['setup'], punchline=data['punchline'])
-        db.session.add(joke)
-        db.session.commit()
+    try:
+        data = fetch_joke(url)
+        if Joke.query.filter_by(setup=data['setup']).first() is None:
+            joke = Joke(_type=data['type'], setup=data['setup'], punchline=data['punchline'])
+            db.session.add(joke)
+            db.session.commit()
+    except Exception as e :
+        print(f"There was an Error: {e}")
     
 def start_thread(db):
     class RepeatTimer(Timer):
