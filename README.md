@@ -6,16 +6,16 @@ This mini project documents an approach to writing a background task that can ac
 
 The problem being tackled here is creating the background task without using an external library like Celery or Apscheduler
 
-To avoid intefering with the flask's serve instance a daemonized threading is used.
+To avoid intefering with the flask's serve instance a daemonized thread is used.
 
 
 ## This App
 
-This app basically runs a flask server while the background job fetches and adds joke from [https://official-joke-api.appspot.com/jokes/random](https://official-joke-api.appspot.com/jokes/random) 🚀P/S The jokes are 🔥.
+This app basically runs a flask server while the background job fetches and adds joke from [https://official-joke-api.appspot.com/jokes/random](https://official-joke-api.appspot.com/jokes/random) 🚀PS. The jokes are 🔥.
 
 ## Step 1. Create the task using a modified threading.Timer
 
-threading.Timer gives the waiting functionality but does not repeat the task so let's patch it :
+*threading.Timer* gives the waiting functionality but does not repeat the task so let's patch it :
 code in : app/background_db_task.py
 
 ```python
